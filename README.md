@@ -30,7 +30,7 @@ Spodziewany efekt: Skrypt wygeneruje plik smog_model.pkl i wypisze raport z klas
 #### Uwaga analityczna na zaliczenie:
 Dane syntetyczne celowo wykorzystują nakładające się na siebie rozkłady prawdopodobieństwa (szum informacyjny), aby zasymulować warunki rzeczywiste. Wyniki celowo nie są idealne (Precision dla anomalii wynosi ok. 0.92, a Recall ok. 0.85). Pokazuje to zdolność modelu do radzenia sobie z fałszywymi alarmami oraz subtelnymi anomaliami bez przerysowanych uproszczeń.
 
-#### Krok 2: Uruchomienie Serwera API
+### Krok 2: Uruchomienie Serwera API
 W tym samym terminalu wystaw wytrenowany model przez FastAPI.
 
 ```Bash
