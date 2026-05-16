@@ -38,7 +38,9 @@ uvicorn ml_api:app --host 0.0.0.0 --port 8001
 ```
 Spodziewany efekt: Komunikat Application startup complete. Serwer czeka na zapytania.
 
-💡 W razie problemu "Address already in use" na porcie 8001, użyj komendy pkill -f uvicorn aby zabić zawieszone procesy API.
+💡 W razie problemu "Address already in use" na porcie 8001, użyj komendy
+```pkill -f uvicorn```
+aby zabić zawieszone procesy API.
 
 ### Krok 3: Uruchomienie Konsumentów (Nasłuch)
 Otwórz dwa nowe terminale i przejdź w nich do folderu consumers.
