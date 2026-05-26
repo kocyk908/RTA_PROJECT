@@ -30,13 +30,17 @@ Spodziewany efekt: Skrypt wygeneruje plik smog_model.pkl i wypisze raport z klas
 #### Uwaga analityczna na zaliczenie:
 Dane syntetyczne celowo wykorzystują nakładające się na siebie rozkłady prawdopodobieństwa (szum informacyjny), aby zasymulować warunki rzeczywiste. Wyniki celowo nie są idealne (Precision dla anomalii wynosi ok. 0.92, a Recall ok. 0.85). Pokazuje to zdolność modelu do radzenia sobie z fałszywymi alarmami oraz subtelnymi anomaliami bez przerysowanych uproszczeń.
 
-#### Krok 2: Uruchomienie Serwera API
+### Krok 2: Uruchomienie Serwera API
 W tym samym terminalu wystaw wytrenowany model przez FastAPI.
 
 ```Bash
 uvicorn ml_api:app --host 0.0.0.0 --port 8001
 ```
 Spodziewany efekt: Komunikat Application startup complete. Serwer czeka na zapytania.
+
+💡 W razie problemu "Address already in use" na porcie 8001, użyj komendy
+```pkill -f uvicorn```
+aby zabić zawieszone procesy API.
 
 ### Krok 3: Uruchomienie Konsumentów (Nasłuch)
 Otwórz dwa nowe terminale i przejdź w nich do folderu consumers.
@@ -74,5 +78,3 @@ Przez większość czasu okno pozostanie puste. Jeśli generator zasymuluje awar
 Terminal 3 (Konsument ML):
 Gdy w systemie pojawi się kombinacja niepokojących cech (np. wysoki poziom pyłów wygenerowany przez pożar, niska temperatura i brak wiatru), wdrożony model oceni prawdopodobieństwo anomalii. Log zawiera pełne, urealnione podsumowanie pogodowe:
 🔥 ALERT ML [92%]: SENSOR_04 | PM2.5: 185.50 | Temp: -2.3°C | Wiatr: 1.0 m/s
-
-💡 W razie problemu "Address already in use" na porcie 8001, użyj komendy **pkill -f uvicorn** aby zabić zawieszone procesy API.
