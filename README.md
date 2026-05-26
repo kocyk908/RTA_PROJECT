@@ -6,13 +6,15 @@ Projekt symuluje zaawansowany system detekcji anomalii smogowych w czasie rzeczy
 
 Zalecany podział plików w środowisku (np. JupyterLab):
 * `api/`
-  * `train_model.py` (Skrypt generujący i trenujący model RF)
-  * `ml_api.py` (Serwer FastAPI wystawiający model do scoringu)
+  * `train_model.py`
+  * `ml_api.py`
 * `generator/`
-  * `producer.py` (Generator danych z czujników)
+  * `producer.py`
 * `consumers/`
-  * `consumer_rules.py` (Wykrywa błąd "stuck sensor" - zawieszony czujnik)
-  * `consumer_ml.py` (Wykrywa piki zanieczyszczeń odpytując API)
+  * `consumer_rules.py`
+  * `consumer_ml.py`
+* `BI/`
+  * `dashboard.ipynb`
 
 ---
 
@@ -46,12 +48,12 @@ aby zabić zawieszone procesy API.
 Otwórz dwa nowe terminale i przejdź w nich do folderu consumers.
 
 W Terminalu 2 uruchom: 
-```
+``` Bash
 python consumer_rules.py
 ```
 
 W Terminalu 3 uruchom: 
-```
+``` Bash
 python consumer_ml.py
 ```
 
@@ -78,3 +80,13 @@ Przez większość czasu okno pozostanie puste. Jeśli generator zasymuluje awar
 Terminal 3 (Konsument ML):
 Gdy w systemie pojawi się kombinacja niepokojących cech (np. wysoki poziom pyłów wygenerowany przez pożar, niska temperatura i brak wiatru), wdrożony model oceni prawdopodobieństwo anomalii. Log zawiera pełne, urealnione podsumowanie pogodowe:
 🔥 ALERT ML [92%]: SENSOR_04 | PM2.5: 185.50 | Temp: -2.3°C | Wiatr: 1.0 m/s
+
+### Krok 5: LIVE Dashboard (Jupyter Notebook)
+Otwórz folder **BI** i uruchom: 
+``` Bash
+dashboard.ipynb
+```
+w Jupyterze i wykonaj kolejno:
+- Komórka 1 – Uruchom konsumenta Kafki
+- Komórka 2 – Wyświetlanie wykresów
+
