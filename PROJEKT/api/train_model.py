@@ -1,3 +1,13 @@
+####
+
+## Generuje syntetyczne dane treningowe
+##   anomalie mieszają się z "normalnymi"
+## Trenuje Random Forest Classifier
+## Zapisuje model do smog_model.pkl
+
+####
+
+
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
@@ -15,7 +25,7 @@ print("Generowanie rozszerzonych danych syntetycznych...")
 
 # Normalne odczyty: typowa pogoda
 normal_data = pd.DataFrame({
-    # Rozkład log-normalny: zazwyczaj niska wartość, ale "ogon" potrafi dobić do 110!
+    # Rozkład log-normalny: zazwyczaj niska wartość, ale potrafi dobić do 110
     'pm25': np.random.lognormal(mean=3.2, sigma=0.6, size=N_NORMAL).clip(5, 110),
     'humidity': np.random.normal(65, 15, N_NORMAL).clip(0, 100),
     'temperature': np.random.normal(8, 10, N_NORMAL),
@@ -25,8 +35,8 @@ normal_data = pd.DataFrame({
 })
 
 anomaly_data = pd.DataFrame({
-    # UWAGA: Anomalie zaczynamy już od 80! Będą się mocno mieszać z gorszymi dniami "w normie"
-    'pm25': np.random.uniform(80, 250, N_ANOMALY),
+    # Anomalie zaczynamy już od 60. Będą się mieszać z gorszymi dniami "w normie"
+    'pm25': np.random.lognormal(mean=3.8, sigma=0.8, size=N_ANOMALY).clip(60, 300),
     'humidity': np.random.normal(80, 10, N_ANOMALY).clip(0, 100),
     'temperature': np.random.normal(0, 8, N_ANOMALY),
     # Poisson: przy smogu wiatr jest słaby (średnio 1 m/s), ale pokrywa się z dniami w normie
@@ -37,7 +47,6 @@ anomaly_data = pd.DataFrame({
 # Łączenie i mieszanie danych
 df = pd.concat([normal_data, anomaly_data], ignore_index=True).sample(frac=1, random_state=42)
 
-# Teraz model faktycznie ma z czego pobrać te kolumny!
 features = ['pm25', 'humidity', 'temperature', 'wind_speed']
 X = df[features]
 y = df['is_anomaly']

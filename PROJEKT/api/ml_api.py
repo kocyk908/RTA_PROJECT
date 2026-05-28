@@ -1,7 +1,16 @@
+####
+
+## Ładuje smog_model.pkl
+## Uruchamia FastAPI na porcie 8001
+## Endpoint /score
+
+####
+
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
-import pandas as pd  # <-- DODANY IMPORT PANDAS
+import pandas as pd
 
 app = FastAPI(title="Smog Anomaly API")
 
@@ -22,7 +31,7 @@ class SensorData(BaseModel):
 
 @app.post("/score")
 def score(data: SensorData):
-    # Tworzymy DataFrame zawierający WSZYSTKIE cechy, na których model się uczył
+    # Tworzymy DataFrame zawierający wszystkie cechy, na których model się uczył
     X = pd.DataFrame([{
         "pm25": data.pm25,
         "humidity": data.humidity,

@@ -1,3 +1,13 @@
+####
+
+## Czyta sensor_readings z Kafki
+## Przechowuje 5 ostatnich odczytów dla każdego czujnika
+## Sprawdza czy 5 odczytów jest identycznych
+## Wysyła alert STUCK_SENSOR do topicu alerts
+
+####
+
+
 from kafka import KafkaConsumer, KafkaProducer
 import json
 from collections import defaultdict
