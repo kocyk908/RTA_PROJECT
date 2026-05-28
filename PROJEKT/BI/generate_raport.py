@@ -92,7 +92,7 @@ if readings:
             czas_str = a['time'].strftime('%H:%M:%S')
             
             # Wypisujemy główną linię
-            print(f"{i:2d}. [{a['type']:15}] | Czujnik: {a['sensor_id']} | PM2.5: {a['pm25']:6.1f} | Czas: {czas_str}")
+            print(f"{i:2d}. [{a['type']}] | Czujnik: {a['sensor_id']} | PM2.5: {a['pm25']:6.1f} | Czas: {czas_str}")
             
             # Jeśli to alert ML, dopisujemy warunki i powód
             # Jeśli to alert ML, dopisujemy warunki i powód
