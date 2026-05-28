@@ -38,8 +38,7 @@ python train_model.py
 ```
 Spodziewany efekt: Skrypt wygeneruje plik smog_model.pkl i wypisze raport z klasyfikacji.
 
-#### Uwaga analityczna na zaliczenie:
-Interpretacja wyników:
+#### Interpretacja wyników:
 
 - Precision (anomalie) = 0.83 – 83% alertów to prawdziwe anomalie
 
